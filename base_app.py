@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import requests
 from PIL import Image
 
 #config
@@ -18,14 +19,14 @@ file= st.file_uploader("Upload Image", type=["png","jpg","jpeg"])
 if file == None :
     st.write('No image')
 else:
-    file_details = {"filename":file.name, "filetype":file.type,
-                              "filesize (in MB)":file.size / 1000000}
-    st.write(file_details)
+    # file_details = {"filename":file.name, "filetype":file.type,
+    #                          "filesize (in MB)":file.size / 1000000}
+    # st.write(file_details)
     image = Image.open(file)
     st.image(image, width = 400)
 
 #uploading image from your camera
-st.header('or upload directly from your camera :')
+st.header('or upload directly from your camera:')
 picture = st.camera_input("Take a picture")
 if picture:
      st.image(picture)
@@ -38,9 +39,17 @@ hide_ad = """
         """
 st.markdown(hide_ad, unsafe_allow_html = True)
 
-st.write('test')
+if st.button('Check the vibe'):
+    url = 'http://127.0.0.1:8000/vibecheck'
+    headers = {'Content-Type': 'multipart/form-data'}
 
+    payload = {'file': image}
 
+    response = requests.post(url, headers, payload)
+
+    st.write(response.status_code)
+else:
+    st.write('Goodbye')
 
 #if we want to download the file in the computer
 #if choice == "Image":
