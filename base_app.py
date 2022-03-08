@@ -43,7 +43,7 @@ hide_ad = """
 st.markdown(hide_ad, unsafe_allow_html = True)
 
 if st.button('Check the vibe'):
-    url = 'http://127.0.0.1:8000/vibecheck'
+    url = 'https://vibe-opf4327g5q-ew.a.run.app/vibecheck'
     headers = {'Content-Type': 'application/json',
                'Accept': 'text/plain'}
 
