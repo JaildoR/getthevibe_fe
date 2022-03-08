@@ -42,10 +42,8 @@ st.markdown(hide_ad, unsafe_allow_html = True)
 if st.button('Check the vibe'):
     url = 'http://127.0.0.1:8000/vibecheck'
     headers = {'Content-Type': 'multipart/form-data'}
-
-    payload = {'file': image}
-
-    response = requests.post(url, headers, payload)
+    file_post = {'file': file}
+    response = requests.post(url, headers,files = file_post)
 
     st.write(response.status_code)
 else:
