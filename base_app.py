@@ -29,10 +29,10 @@ else:
     image = Image.open(file)
     st.image(image, width = 400)
 #uploading image from your camera
-st.header('or upload directly from your camera:')
-picture = st.camera_input("Take a picture")
-if picture:
-     st.image(picture)
+# st.header('or upload directly from your camera:')
+# picture = st.camera_input("Take a picture")
+# if picture:
+#      st.image(picture)
 
 #hiding 'made with streamlit'
 hide_ad = """
