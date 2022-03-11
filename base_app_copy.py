@@ -25,14 +25,6 @@ st.markdown(hide_ad, unsafe_allow_html = True)
 page_names = ['File Uploader', 'Camera Photo']
 page = st.radio('Choose one', page_names)
 
-def anim(gif):
-    gif = st.markdown("![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)")
-    if not results:
-        return gif
-    else :
-        gif = ""
-        return gif
-
 if page == 'File Uploader':
     #file downloader
     file= st.file_uploader("", type=["png","jpg","jpeg"])
@@ -54,10 +46,12 @@ if page == 'File Uploader':
             response = requests.post(url, headers,files = file_post)
             results = response.content.decode('utf-8')
             results = json.loads(results)
-            st.rerun_script(anim)
-            st.header('The emotion is:')
-            st.subheader(results["emotion"])
-
+            if results :
+                del gif
+                st.header('The emotion is:')
+                st.subheader(results["emotion"])
+            else:
+                pass
 
 else :
     picture = st.camera_input("Take a picture")
@@ -74,7 +68,6 @@ else :
             results = json.loads(results)
             st.header('The emotion is:')
             st.subheader(results["emotion"])
-
 
 #changing button color
 #m = st.markdown("""
