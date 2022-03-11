@@ -1,4 +1,4 @@
-import base64
+
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -14,26 +14,6 @@ st.set_page_config(page_title = 'Get The Vibe', page_icon = img)
 logo = Image.open('streamlit-img/get the vibe .png')
 st.image(logo)
 
-#file downloader
-file= st.file_uploader("", type=["png","jpg","jpeg"])
-
-#shows the picture if there is one
-if file == None :
-    st.write('No image')
-else:
-    # file_details = {"filename":file.name, "filetype":file.type,
-    #                          "filesize (in MB)":file.size / 1000000}
-    # st.write(file_details)
-
-    file_bytes = file.getvalue()
-    image = Image.open(file)
-    st.image(image, width = 400)
-#uploading image from your camera
-# st.header('or upload directly from your camera:')
-# picture = st.camera_input("Take a picture")
-# if picture:
-#      st.image(picture)
-
 #hiding 'made with streamlit'
 hide_ad = """
         <style>
@@ -42,16 +22,58 @@ hide_ad = """
         """
 st.markdown(hide_ad, unsafe_allow_html = True)
 
-if st.button('Check the vibe'):
-    url = 'https://vibe-opf4327g5q-ew.a.run.app/vibecheck'
-    headers = {'Content-Type': 'application/json',
+#diff pages for image or camera photo
+page_names = ['File Uploader', 'Camera Photo']
+page = st.radio('Choose one', page_names)
+
+if page == 'File Uploader':
+    #file downloader
+    file= st.file_uploader("", type=["png","jpg","jpeg"])
+
+    #shows the picture if there is one
+    if file == None :
+        pass
+    else:
+        file_bytes = file.getvalue()
+        image = Image.open(file)
+        st.image(image, width = 400)
+        if st.button('😀 Get the vibe 😀'):
+            gif = st.markdown("![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)")
+            url = 'https://vibe-opf4327g5q-ew.a.run.app/vibecheck'
+            headers = {'Content-Type': 'application/json',
                'Accept': 'text/plain'}
 
-    file_post = {'file': file_bytes}
-    response = requests.post(url, headers,files = file_post)
-    results = response.content.decode('utf-8')
-    results = json.loads(results)
-    st.header('The emotion is:')
-    st.subheader(results["emotion"])
-else:
-    pass
+            file_post = {'file': file_bytes}
+            response = requests.post(url, headers,files = file_post)
+            results = response.content.decode('utf-8')
+            results = json.loads(results)
+            if results :
+                del gif
+                st.header('The emotion is:')
+                st.subheader(results["emotion"])
+            else:
+                pass
+
+else :
+    picture = st.camera_input("Take a picture")
+    if picture:
+        st.image(picture)
+        if st.button('😀 Get the vibe 😀'):
+            st.markdown("![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)")
+            url = 'https://vibe-opf4327g5q-ew.a.run.app/vibecheck'
+            headers = {'Content-Type': 'application/json',
+               'Accept': 'text/plain'}
+            file_post = {'file': picture}
+            response = requests.post(url, headers,files = file_post)
+            results = response.content.decode('utf-8')
+            results = json.loads(results)
+            st.header('The emotion is:')
+            st.subheader(results["emotion"])
+
+#changing button color
+#m = st.markdown("""
+#<style>
+#div.stButton > button:first-child {
+#    background-color: #233067
+#}
+#</style>""", unsafe_allow_html=True)
