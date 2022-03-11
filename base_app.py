@@ -21,18 +21,9 @@ file= st.file_uploader("", type=["png","jpg","jpeg"])
 if file == None :
     st.write('No image')
 else:
-    # file_details = {"filename":file.name, "filetype":file.type,
-    #                          "filesize (in MB)":file.size / 1000000}
-    # st.write(file_details)
-
     file_bytes = file.getvalue()
     image = Image.open(file)
     st.image(image, width = 400)
-#uploading image from your camera
-# st.header('or upload directly from your camera:')
-# picture = st.camera_input("Take a picture")
-# if picture:
-#      st.image(picture)
 
 #hiding 'made with streamlit'
 hide_ad = """
@@ -54,4 +45,4 @@ if st.button('Check the vibe'):
     st.header('The emotion is:')
     st.subheader(results["emotion"])
 else:
-    pass
+    st.write('Upload an image to Check the vibe !')
