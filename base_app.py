@@ -46,3 +46,5 @@ if st.button('Check the vibe'):
     st.subheader(results["emotion"])
 else:
     st.write('Upload an image to Check the vibe !')
+
+st.write('test')
