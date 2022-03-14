@@ -52,7 +52,6 @@ if page == 'File Uploader':
                 st.subheader(results["emotion"])
             else:
                 pass
-
 else :
     picture = st.camera_input("Take a picture")
     if picture:
