@@ -64,7 +64,7 @@ if page == 'File Uploader':
         st.image(image, width = 400)
         if st.button('😀 Get the vibe 😀'):
             gif = st.markdown('<img src="https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif" class="loading">', unsafe_allow_html=True)
-            url = 'https://vibe-opf4327g5q-ew.a.run.app/vibecheck'
+            url = 'https://vibefull-opf4327g5q-ew.a.run.app/vibecheck'
             headers = {'Content-Type': 'application/json',
             'Accept': 'text/plain'}
             file_post = {'file': file_bytes}
@@ -85,4 +85,5 @@ else :
             file_post = {'file': picture}
             response = requests.post(url, headers,files = file_post)
             st.image(response.content)
+            print(response.content)
             gif.empty()
