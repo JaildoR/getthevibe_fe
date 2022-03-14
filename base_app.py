@@ -66,8 +66,8 @@ if page == 'File Uploader':
             file_post = {'file': file_bytes}
             response = requests.post(url, headers,files = file_post)
             results = response.content.decode('utf-8')
+            gif.empty()
             results = json.loads(results)
-
             st.header('I detect...')
             st.subheader(results["emotion"])
 
@@ -85,17 +85,8 @@ else :
             'Accept': 'text/plain'}
             file_post = {'file': picture}
             response = requests.post(url, headers,files = file_post)
-            gif.empty()
             results = response.content.decode('utf-8')
+            gif.empty()
             results = json.loads(results)
             st.header('I detect...')
             st.subheader(results["emotion"])
-
-st.write('test')
-#changing button color
-#m = st.markdown("""
-#<style>
-#div.stButton > button:first-child {
-#    background-color: #233067
-#}
-#</style>""", unsafe_allow_html=True)

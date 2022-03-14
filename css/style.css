@@ -24,3 +24,9 @@ div.stButton > button:first-child {
 div.stButton > button:first-child:hover {
 color: red
 }
+
+/* Results text */
+.css-10trblm.e16nr0p33 {
+  color: hotpink;
+  text-align: center;
+}
