@@ -4,6 +4,7 @@ import numpy as np
 import requests
 from PIL import Image
 import json
+import logging
 
 #config
 img = Image.open('streamlit-img/haut_de_page.jpg')
@@ -47,6 +48,10 @@ def anim(gif):
         gif = ""
         return gif
 
+
+def clear_picture():
+    st.session_state["picture"] = None
+
 if page == 'File Uploader':
     #file downloader
     file= st.file_uploader("", type=["png","jpg","jpeg"])
@@ -75,15 +80,12 @@ else :
     picture = st.camera_input("Take a picture")
     if picture:
         #st.image(picture)
-        if st.button('😀 Get the vibe 😀'):
+        if st.button('😀 Get the vibe 😀', on_click=clear_picture):
             gif = st.markdown('<img src="https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif" class="loading">', unsafe_allow_html=True)
-            url = 'https://vibe-opf4327g5q-ew.a.run.app/vibecheck'
+            url = 'https://vibefull-opf4327g5q-ew.a.run.app/vibecheck'
             headers = {'Content-Type': 'application/json',
             'Accept': 'text/plain'}
             file_post = {'file': picture}
             response = requests.post(url, headers,files = file_post)
-            results = response.content.decode('utf-8')
+            st.image(response.content)
             gif.empty()
-            results = json.loads(results)
-            st.header('I detect...')
-            st.subheader(results["emotion"])
