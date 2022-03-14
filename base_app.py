@@ -23,7 +23,6 @@ st.markdown(hide_ad, unsafe_allow_html = True)
 with open('css/style.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-#st.markdown('<style>body{color: hotpink;}</style>', unsafe_allow_html=True)
 
 # body
 col1, col2, col3 = st.columns(3)
@@ -59,7 +58,7 @@ if page == 'File Uploader':
         image = Image.open(file)
         st.image(image, width = 400)
         if st.button('😀 Get the vibe 😀'):
-            gif = st.image('https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif')
+            gif = st.markdown('<img src="https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif" class="loading">', unsafe_allow_html=True)
             url = 'https://vibe-opf4327g5q-ew.a.run.app/vibecheck'
             headers = {'Content-Type': 'application/json',
             'Accept': 'text/plain'}
@@ -77,9 +76,7 @@ else :
     if picture:
         #st.image(picture)
         if st.button('😀 Get the vibe 😀'):
-            #gif = st.image('https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif')
             gif = st.markdown('<img src="https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif" class="loading">', unsafe_allow_html=True)
-            #st.markdown("![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)")
             url = 'https://vibe-opf4327g5q-ew.a.run.app/vibecheck'
             headers = {'Content-Type': 'application/json',
             'Accept': 'text/plain'}
