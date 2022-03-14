@@ -69,11 +69,8 @@ if page == 'File Uploader':
             'Accept': 'text/plain'}
             file_post = {'file': file_bytes}
             response = requests.post(url, headers,files = file_post)
-            results = response.content.decode('utf-8')
+            st.image(response.content)
             gif.empty()
-            results = json.loads(results)
-            st.header('I detect...')
-            st.subheader(results["emotion"])
 
 
 else :
