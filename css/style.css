@@ -1,0 +1,26 @@
+/* Loading results GIF */
+.loading {
+  display: block;
+  margin: 0 auto;
+  border-radius: 25px;
+  width: 332px;
+}
+
+.css-1xv07vx e16nr0p30 {
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
+
+/* 'Get the vibe' button */
+div.stButton > button:first-child {
+  color: hotpink;
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
+
+/* 'Get the vibe' button when you hover over it*/
+div.stButton > button:first-child:hover {
+color: red
+}
