@@ -94,7 +94,7 @@ else :
 
 
 #just adding some space
-for i in range(1, 50):
+for i in range(1, 25):
     ""
 
 #image and name for each team member
