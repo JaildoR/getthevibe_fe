@@ -68,7 +68,6 @@ if page == 'File Uploader':
             emotion_df = response.headers.get('emotion_df')
             emotion_df = pd.DataFrame.from_dict((ast.literal_eval(emotion_df)))
             st.subheader('The overall vibe here is...')
-            print(emotion_df)
             time.sleep(2)
             st.subheader(f"{round(emotion_df.iloc[0,1]*100)} % {emotion_df.iloc[0,0]} !")
 
@@ -90,7 +89,6 @@ else :
             emotion_df = response.headers.get('emotion_df')
             emotion_df = pd.DataFrame.from_dict((ast.literal_eval(emotion_df)))
             st.subheader('The overall vibe here is...')
-            print(emotion_df)
             time.sleep(2)
             st.subheader(f"{round(emotion_df.iloc[0,1]*100)} % {emotion_df.iloc[0,0]} !")
 
