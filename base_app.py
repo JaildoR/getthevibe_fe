@@ -73,7 +73,7 @@ else :
     picture = st.camera_input("")
     if picture:
         #st.image(picture)
-        if st.button('😀 Get the vibe 😀', on_click=clear_picture):
+        if st.button('😀 Get the vibe 😀'):
             gif = st.markdown('<img src="https://media2.giphy.com/media/CTRGM0rLisf6M/giphy.gif" class="loading">', unsafe_allow_html=True)
             url = 'https://vibefull-opf4327g5q-ew.a.run.app/vibecheck'
             headers = {'Content-Type': 'application/json',
@@ -96,7 +96,7 @@ for i in range(1, 25):
 #image and name for each team member
 st.subheader('Meet the team !')
 col1, col2, col3, col4 = st.columns(4)
-x = 180
+x = 150
 with col1 :
     name = st.write('Jaildo Rocha')
     image = st.image('streamlit-img/Jaildo_model.png', width = x)
@@ -108,4 +108,4 @@ with col3:
     image = st.image('streamlit-img/Jasper_model.png', width = x)
 with col4:
     name = st.write('Eric Coccoli')
-    image = st.image('streamlit-img/Eric_model.png', width = 230)
+    image = st.image('streamlit-img/Eric_model.png', width = x)
