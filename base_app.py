@@ -20,8 +20,8 @@ hide_ad = """
         </style>
         """
 st.markdown(hide_ad, unsafe_allow_html = True)
-#
 
+#Load CSS Stylesheet
 with open('css/style.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
@@ -41,10 +41,6 @@ with col2:
 with col3:
     pass
 
-
-def clear_picture():
-    st.session_state["picture"] = None
-
 if page == 'File Uploader':
     #file downloader
     file= st.file_uploader("", type=["png","jpg","jpeg"])
@@ -56,7 +52,7 @@ if page == 'File Uploader':
         image = Image.open(file)
         uploaded = st.image(image, width = 400)
         if st.button('😀 Get the vibe 😀'):
-            gif = st.markdown('<img src="https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif" class="loading">', unsafe_allow_html=True)
+            gif = st.markdown('<img src="https://media2.giphy.com/media/CTRGM0rLisf6M/giphy.gif" class="loading">', unsafe_allow_html=True)
             url = 'https://vibefull-opf4327g5q-ew.a.run.app/vibecheck'
             headers = {'Content-Type': 'application/json',
             'Accept': 'text/plain'}
@@ -78,7 +74,7 @@ else :
     if picture:
         #st.image(picture)
         if st.button('😀 Get the vibe 😀', on_click=clear_picture):
-            gif = st.markdown('<img src="https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif" class="loading">', unsafe_allow_html=True)
+            gif = st.markdown('<img src="https://media2.giphy.com/media/CTRGM0rLisf6M/giphy.gif" class="loading">', unsafe_allow_html=True)
             url = 'https://vibefull-opf4327g5q-ew.a.run.app/vibecheck'
             headers = {'Content-Type': 'application/json',
             'Accept': 'text/plain'}
@@ -100,15 +96,16 @@ for i in range(1, 25):
 #image and name for each team member
 st.subheader('Meet the team !')
 col1, col2, col3, col4 = st.columns(4)
+x = 180
 with col1 :
     name = st.write('Jaildo Rocha')
-    image = st.image('https://avatars.githubusercontent.com/u/10917858?v=4')
+    image = st.image('streamlit-img/Jaildo_model.png', width = x)
 with col2:
     name = st.write('Pilar Figueroa')
-    image = st.image('https://res.cloudinary.com/wagon/image/upload/c_fill,g_face,h_200,w_200/v1639069068/evekemjngwcak2wn2ybh.jpg')
+    image = st.image('streamlit-img/Pilar_model.png', width = x)
 with col3:
     name = st.write('Jasper Anger')
-    image = st.image('https://avatars.githubusercontent.com/u/96623311?v=4')
+    image = st.image('streamlit-img/Jasper_model.png', width = x)
 with col4:
     name = st.write('Eric Coccoli')
-    image = st.image('https://avatars.githubusercontent.com/u/97439521?v=4')
+    image = st.image('streamlit-img/Eric_model.png', width = 230)
