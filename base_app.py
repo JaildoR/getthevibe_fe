@@ -1,10 +1,10 @@
+from sklearn.covariance import empirical_covariance
 import streamlit as st
 import pandas as pd
 import numpy as np
 import requests
 from PIL import Image
-import json
-import logging
+import ast
 
 #config
 img = Image.open('streamlit-img/haut_de_page.jpg')
@@ -34,19 +34,11 @@ with col2:
     page_names = ['File Uploader', 'Camera Photo']
     page = st.select_slider("",options=page_names)
 
-    #diff pages for image or camera photo
+    # diff pages for image or camera photo
     # page_names = ['File Uploader', 'Camera Photo']
-    #page = st.radio('Choose one', page_names)
+    # page = st.radio('Choose one', page_names)
 with col3:
     pass
-
-def anim(gif):
-    gif = st.markdown("![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)")
-    if not results:
-        return gif
-    else :
-        gif = ""
-        return gif
 
 
 def clear_picture():
@@ -70,11 +62,15 @@ if page == 'File Uploader':
             file_post = {'file': file_bytes}
             response = requests.post(url, headers,files = file_post)
             st.image(response.content)
+            emotion_df = response.headers.get('emotion_df')
+            emotion_df = pd.DataFrame.from_dict((ast.literal_eval(emotion_df)))
+            emotion_df = emotion_df.reset_index(drop=True)
+            st.dataframe(emotion_df)
             gif.empty()
 
 
 else :
-    picture = st.camera_input("Take a picture")
+    picture = st.camera_input("")
     if picture:
         #st.image(picture)
         if st.button('😀 Get the vibe 😀', on_click=clear_picture):
@@ -85,5 +81,7 @@ else :
             file_post = {'file': picture}
             response = requests.post(url, headers,files = file_post)
             st.image(response.content)
-            print(response.content)
+            emotion_df = response.headers.get('emotion_df')
+            emotion_df = pd.DataFrame.from_dict((ast.literal_eval(emotion_df)))
+            st.dataframe(emotion_df)
             gif.empty()
