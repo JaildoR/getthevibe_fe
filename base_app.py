@@ -106,3 +106,4 @@ with col3:
 with col4:
     name = st.write('Eric Coccoli')
     image = st.image('https://avatars.githubusercontent.com/u/97439521?v=4')
+
