@@ -1,18 +1,17 @@
+from sklearn.covariance import empirical_covariance
 import streamlit as st
 import pandas as pd
 import numpy as np
 import requests
 from PIL import Image
-import json
+import ast
 
 #config
-img = Image.open('streamlit-img/haut_de_page.jpg')
-st.set_page_config(page_title = 'Get The Vibe', page_icon = img)
-
+img = Image.open('streamlit-img/Happy face logo.png')
+st.set_page_config(page_title = 'Get The Vibe', page_icon = img, layout="centered")
 #title of the app
-logo = Image.open('streamlit-img/get the vibe .png')
+logo = Image.open('streamlit-img/logo name.png')
 st.image(logo)
-
 #hiding 'made with streamlit'
 hide_ad = """
         <style>
@@ -20,66 +19,91 @@ hide_ad = """
         </style>
         """
 st.markdown(hide_ad, unsafe_allow_html = True)
+#
 
-#diff pages for image or camera photo
-page_names = ['File Uploader', 'Camera Photo']
-page = st.radio('Choose one', page_names)
+with open('css/style.css') as f:
+    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-def anim(gif):
-    gif = st.markdown("![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)")
-    if not results:
-        return gif
-    else :
-        gif = ""
-        return gif
+
+# body
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    pass
+with col2:
+    page_names = ['File Uploader', 'Camera Photo']
+    page = st.select_slider("",options=page_names)
+
+    # diff pages for image or camera photo
+    # page_names = ['File Uploader', 'Camera Photo']
+    # page = st.radio('Choose one', page_names)
+with col3:
+    pass
+
+
+def clear_picture():
+    st.session_state["picture"] = None
 
 if page == 'File Uploader':
     #file downloader
     file= st.file_uploader("", type=["png","jpg","jpeg"])
-
     #shows the picture if there is one
     if file == None :
-        st.write('No image')
+        pass
     else:
         file_bytes = file.getvalue()
         image = Image.open(file)
         st.image(image, width = 400)
         if st.button('😀 Get the vibe 😀'):
-            gif = st.markdown("![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)")
-            url = 'https://vibe-opf4327g5q-ew.a.run.app/vibecheck'
+            gif = st.markdown('<img src="https://media2.giphy.com/media/CTRGM0rLisf6M/giphy.gif" class="loading">', unsafe_allow_html=True)
+            url = 'https://vibefull-opf4327g5q-ew.a.run.app/vibecheck'
             headers = {'Content-Type': 'application/json',
-               'Accept': 'text/plain'}
-
+            'Accept': 'text/plain'}
             file_post = {'file': file_bytes}
             response = requests.post(url, headers,files = file_post)
-            results = response.content.decode('utf-8')
-            results = json.loads(results)
-            st.rerun_script(anim)
-            st.header('The emotion is:')
-            st.subheader(results["emotion"])
+            st.image(response.content, width = 530)
+            emotion_df = response.headers.get('emotion_df')
+            emotion_df = pd.DataFrame.from_dict((ast.literal_eval(emotion_df)))
+            emotion_df = emotion_df.reset_index(drop=True)
+            st.dataframe(emotion_df)
+            gif.empty()
 
 
 else :
-    picture = st.camera_input("Take a picture")
+    picture = st.camera_input("")
     if picture:
-        st.image(picture)
-        if st.button('😀 Get the vibe 😀'):
-            st.markdown("![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)")
-            url = 'https://vibe-opf4327g5q-ew.a.run.app/vibecheck'
+        #st.image(picture)
+        if st.button('😀 Get the vibe 😀', on_click=clear_picture):
+            gif = st.markdown('<img src="https://media2.giphy.com/media/CTRGM0rLisf6M/giphy.gif" class="loading">', unsafe_allow_html=True)
+            url = 'https://vibefull-opf4327g5q-ew.a.run.app/vibecheck'
             headers = {'Content-Type': 'application/json',
-               'Accept': 'text/plain'}
+            'Accept': 'text/plain'}
             file_post = {'file': picture}
             response = requests.post(url, headers,files = file_post)
-            results = response.content.decode('utf-8')
-            results = json.loads(results)
-            st.header('The emotion is:')
-            st.subheader(results["emotion"])
+            st.image(response.content)
+            emotion_df = response.headers.get('emotion_df')
+            emotion_df = pd.DataFrame.from_dict((ast.literal_eval(emotion_df)))
+            st.dataframe(emotion_df)
+            gif.empty()
 
 
-#changing button color
-#m = st.markdown("""
-#<style>
-#div.stButton > button:first-child {
-#    background-color: #233067
-#}
-#</style>""", unsafe_allow_html=True)
+#just adding some space
+for i in range(1, 50):
+    ""
+
+#image and name for each team member
+st.subheader('Meet the team !')
+col1, col2, col3, col4 = st.columns(4)
+x = 180
+with col1 :
+    name = st.write('Jaildo Rocha')
+    image = st.image('streamlit-img/Jaildo_model.png', width = x)
+with col2:
+    name = st.write('Pilar Figueroa')
+    image = st.image('streamlit-img/Pilar_model.png', width = x)
+with col3:
+    name = st.write('Jasper Anger')
+    image = st.image('streamlit-img/Jasper_model.png', width = x)
+with col4:
+    name = st.write('Eric Coccoli')
+    image = st.image('streamlit-img/Eric_model.png', width = 230)
