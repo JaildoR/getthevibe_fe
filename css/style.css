@@ -17,8 +17,7 @@
 .loading {
   display: block;
   margin: 0 auto;
-  border-radius: 25px;  /* round the corners */
-  width: 332px;
+  border-radius: 50%;  /* round the corners */
 }
 
 /* 'Get the vibe' button */
