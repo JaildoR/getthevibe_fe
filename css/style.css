@@ -1,8 +1,15 @@
 /* Photo uploaded by user */
-.css-1v0mbdj.etr89bj1 {
+.css-1v0mbdj.etr89bj1 > img:first-child {
   display: block;
   margin: 0 auto;
-  max-height: 700px;
+  max-height: 500px;
+  max-width: fit-content;
+}
+
+.css-1kyxreq.etr89bj0{
+  display: block;
+  margin: 0 auto;
+  max-height: 500px;
   max-width: fit-content;
 }
 

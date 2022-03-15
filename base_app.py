@@ -5,6 +5,7 @@ import numpy as np
 import requests
 from PIL import Image
 import ast
+import time
 
 #config
 img = Image.open('streamlit-img/Happy face logo.png')
@@ -26,7 +27,7 @@ with open('css/style.css') as f:
 
 
 # body
-col1, col2, col3 = st.columns(3)
+col1, col2, col3 = st.columns([1,1.5,1])
 
 with col1:
     pass
@@ -53,7 +54,7 @@ if page == 'File Uploader':
     else:
         file_bytes = file.getvalue()
         image = Image.open(file)
-        st.image(image, width = 400)
+        uploaded = st.image(image, width = 400)
         if st.button('😀 Get the vibe 😀'):
             gif = st.markdown('<img src="https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif" class="loading">', unsafe_allow_html=True)
             url = 'https://vibefull-opf4327g5q-ew.a.run.app/vibecheck'
@@ -61,12 +62,16 @@ if page == 'File Uploader':
             'Accept': 'text/plain'}
             file_post = {'file': file_bytes}
             response = requests.post(url, headers,files = file_post)
+            uploaded.empty()
+            gif.empty()
             st.image(response.content)
             emotion_df = response.headers.get('emotion_df')
             emotion_df = pd.DataFrame.from_dict((ast.literal_eval(emotion_df)))
-            emotion_df = emotion_df.reset_index(drop=True)
-            st.dataframe(emotion_df)
-            gif.empty()
+            st.subheader('The overall vibe here is...')
+            print(emotion_df)
+            time.sleep(2)
+            st.subheader(f"{round(emotion_df.iloc[0,1]*100)} % {emotion_df.iloc[0,0]} !")
+
 
 
 else :
@@ -80,11 +85,14 @@ else :
             'Accept': 'text/plain'}
             file_post = {'file': picture}
             response = requests.post(url, headers,files = file_post)
+            gif.empty()
             st.image(response.content)
             emotion_df = response.headers.get('emotion_df')
             emotion_df = pd.DataFrame.from_dict((ast.literal_eval(emotion_df)))
-            st.dataframe(emotion_df)
-            gif.empty()
+            st.subheader('The overall vibe here is...')
+            print(emotion_df)
+            time.sleep(2)
+            st.subheader(f"{round(emotion_df.iloc[0,1]*100)} % {emotion_df.iloc[0,0]} !")
 
 
 #just adding some space
@@ -106,4 +114,3 @@ with col3:
 with col4:
     name = st.write('Eric Coccoli')
     image = st.image('https://avatars.githubusercontent.com/u/97439521?v=4')
-
