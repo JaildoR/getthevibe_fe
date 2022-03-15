@@ -1,0 +1,45 @@
+/* Photo uploaded by user */
+.css-1v0mbdj.etr89bj1 > img:first-child {
+  display: block;
+  margin: 0 auto;
+  max-height: 800px;
+  max-width: 800px;
+}
+
+.css-1kyxreq.etr89bj0{
+  display: block;
+  margin: 0 auto;
+  max-height: 800px;
+  max-width: 800px;
+}
+
+/* Loading results GIF */
+.loading {
+  display: block;
+  margin: 0 auto;
+  border-radius: 25px;  /* round the corners */
+  width: 332px;
+}
+
+/* 'Get the vibe' button */
+div.stButton > button:first-child {
+  color: white;
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
+
+/* 'Get the vibe' button when you hover over it*/
+div.stButton > button:first-child:hover {
+font-weight: bold;
+}
+
+/* Results text */
+.css-10trblm.e16nr0p33 {
+  color: rgb(0, 0, 0);
+  text-align: center;
+}
+
+.css-10trblm.e16nr0p33 {
+  color: white;
+}

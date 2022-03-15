@@ -20,7 +20,8 @@ hide_ad = """
         </style>
         """
 st.markdown(hide_ad, unsafe_allow_html = True)
-#
+
+#Load CSS Stylesheet
 with open('css/style.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
@@ -39,10 +40,6 @@ with col2:
     # page = st.radio('Choose one', page_names)
 with col3:
     pass
-
-
-def clear_picture():
-    st.session_state["picture"] = None
 
 if page == 'File Uploader':
     #file downloader
@@ -93,7 +90,7 @@ else :
 
 
 #just adding some space
-for i in range(1, 50):
+for i in range(1, 25):
     ""
 
 #image and name for each team member
