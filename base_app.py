@@ -7,7 +7,7 @@ from PIL import Image
 import ast
 
 #config
-img = Image.open('streamlit-img/haut_de_page.jpg')
+img = Image.open('streamlit-img/Happy face logo.png')
 st.set_page_config(page_title = 'Get The Vibe', page_icon = img, layout="centered")
 #title of the app
 logo = Image.open('streamlit-img/get the vibe .png')
@@ -85,3 +85,25 @@ else :
             emotion_df = pd.DataFrame.from_dict((ast.literal_eval(emotion_df)))
             st.dataframe(emotion_df)
             gif.empty()
+
+
+#just adding some space
+for i in range(1, 50):
+    ""
+
+#image and name for each team member
+st.subheader('Meet the team !')
+col1, col2, col3, col4 = st.columns(4)
+with col1 :
+    name = st.write('Jaildo Rocha')
+    image = st.image('https://avatars.githubusercontent.com/u/10917858?v=4')
+with col2:
+    name = st.write('Pilar Figueroa')
+    image = st.image('https://res.cloudinary.com/wagon/image/upload/c_fill,g_face,h_200,w_200/v1639069068/evekemjngwcak2wn2ybh.jpg')
+with col3:
+    name = st.write('Jasper Anger')
+    image = st.image('https://avatars.githubusercontent.com/u/96623311?v=4')
+with col4:
+    name = st.write('Eric Coccoli')
+    image = st.image('https://avatars.githubusercontent.com/u/97439521?v=4')
+
