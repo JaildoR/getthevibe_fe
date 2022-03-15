@@ -11,7 +11,7 @@ import time
 img = Image.open('streamlit-img/Happy face logo.png')
 st.set_page_config(page_title = 'Get The Vibe', page_icon = img, layout="centered")
 #title of the app
-logo = Image.open('streamlit-img/logo name.png')
+logo = Image.open('streamlit-img/get the vibe .png')
 st.image(logo)
 #hiding 'made with streamlit'
 hide_ad = """
